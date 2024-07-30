@@ -1,4 +1,4 @@
-# resolve-chillsmeit
+# resolve-tumbleweed
 Script that fixes DaVinci Resolve in OpenSUSE Tumbleweed
 
 - Fixes DaVinci Resolve not working in OpenSUSE Tumbleweed
