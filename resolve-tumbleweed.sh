@@ -30,7 +30,7 @@ echo -e ""
 echo -e ""
 
 cd ~/Downloads
-matches=(DaVinci_Resolve_*_Linux.zip)
+matches=($(ls DaVinci_Resolve_*_Linux.zip 2>/dev/null))
 
 if [ ${#matches[@]} -eq 0 ]; then
     echo -e "${redbold}No matching files found.${resetcolor}"
