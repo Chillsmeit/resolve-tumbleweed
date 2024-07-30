@@ -21,7 +21,7 @@ pgrep -f "GUI Thread" | xargs -r kill -9
 sudo zypper install -y libapr1-0 libapr-util1-0 libopencl-clang14 libOpenCL1 libOpenCL1-32bit Mesa-libOpenCL libpango-1_0-0 libpango-1_0-0-32bit libpangomm-1_4-1 libpangomm-2_48-1 libjpeg62 libjpeg62-devel
 
 echo -e ""
-echo -e "${orangebold}Please download DaVinci Resolve 19 public beta from:${resetcolor}"
+echo -e "${orangebold}Please download DaVinci Resolve from:${resetcolor}"
 echo -e "https://www.blackmagicdesign.com/products/davinciresolve/studio"
 echo -e ""
 echo -e "${redbold}Put the zip file in the Downloads folder!${resetcolor}"
