@@ -16,5 +16,5 @@ chmod +x resolve-chillsmeit.sh
 
 #### Run script:
 ```
-./resolve-chillseit.sh
+./resolve-chillsmeit.sh
 ```
