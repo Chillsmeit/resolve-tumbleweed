@@ -29,14 +29,6 @@ read -p "Press Enter to continue only after doing the above..."
 echo -e ""
 echo -e ""
 
-sudo rm -rf /opt/resolve
-sudo rm -rf /usr/share/applications/com.blackmagicdesign.*
-sudo rm -rf /var/BlackmagicDesign
-sudo rm -rf /tmp/resolve-tumbleweed
-sudo rm -f /usr/share/icons/hicolor/128x128/apps/DV_Resolve.png
-sudo rm -f /usr/share/icons/hicolor/scalable/apps/DV_Resolve.png
-rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
-
 cd ~/Downloads
 matches=(DaVinci_Resolve_*_Linux.zip)
 
@@ -59,6 +51,14 @@ while true; do
         echo -e "${redbold}Invalid choice, please try again.${resetcolor}"
     fi
 done
+
+sudo rm -rf /opt/resolve
+sudo rm -rf /usr/share/applications/com.blackmagicdesign.*
+sudo rm -rf /var/BlackmagicDesign
+sudo rm -rf /tmp/resolve-tumbleweed
+sudo rm -f /usr/share/icons/hicolor/128x128/apps/DV_Resolve.png
+sudo rm -f /usr/share/icons/hicolor/scalable/apps/DV_Resolve.png
+rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
 
 davinci_no_ext="${davinci_ext%.zip}"
 mkdir /tmp/resolve-tumbleweed
