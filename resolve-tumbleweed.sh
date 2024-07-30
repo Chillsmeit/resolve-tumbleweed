@@ -32,7 +32,7 @@ echo -e ""
 sudo rm -rf /opt/resolve
 sudo rm -rf /usr/share/applications/com.blackmagicdesign.*
 sudo rm -rf /var/BlackmagicDesign
-sudo rm -rf /tmp/resolve-chillsmeit
+sudo rm -rf /tmp/resolve-tumbleweed
 sudo rm -f /usr/share/icons/hicolor/128x128/apps/DV_Resolve.png
 sudo rm -f /usr/share/icons/hicolor/scalable/apps/DV_Resolve.png
 rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
@@ -61,10 +61,10 @@ while true; do
 done
 
 davinci_no_ext="${davinci_ext%.zip}"
-mkdir /tmp/resolve-chillsmeit
-unzip "$davinci_ext" -d /tmp/resolve-chillsmeit
+mkdir /tmp/resolve-tumbleweed
+unzip "$davinci_ext" -d /tmp/resolve-tumbleweed
 rm "$davinci_ext"
-cd /tmp/resolve-chillsmeit
+cd /tmp/resolve-tumbleweed
 sudo SKIP_PACKAGE_CHECK=1 ./"$davinci_no_ext.run"
 
 rm -f Linux_Installation_Instructions.pdf
