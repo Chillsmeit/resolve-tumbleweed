@@ -14,52 +14,57 @@ fi
 
 # Get the PID of the current script
 current_pid=$$
-# Kill the "resolve" processes, excluding the current script
-pgrep -f "resolve" | grep -v "$current_pid" | xargs -r kill -9 || true
-pgrep -f "GUI Thread" | xargs -r kill -9
+kill_resolve(){
+	# Kill the "resolve" processes, excluding the current script
+	pgrep -f "resolve" | grep -v "$current_pid" | xargs -r kill -9 || true
+	pgrep -f "GUI Thread" | xargs -r kill -9
+}
+find_resolve(){
+	echo -e ""
+	echo -e "${orangebold}Please download DaVinci Resolve from:${resetcolor}"
+	echo -e "https://www.blackmagicdesign.com/products/davinciresolve/studio"
+	echo -e ""
+	echo -e "${redbold}Put the zip file in the Downloads folder!${resetcolor}"
+	read -p "Press Enter to continue only after doing the above..."
+	echo -e ""
+	echo -e ""
 
+	cd ~/Downloads
+	matches=($(ls DaVinci_Resolve_*_Linux.zip 2>/dev/null))
+
+	if [ ${#matches[@]} -eq 0 ]; then
+		echo -e "${redbold}No matching files found.${resetcolor}"
+		exit 1
+	fi
+
+	echo -e "${orangebold}Looking for matches....${resetcolor}\n"
+	for i in "${!matches[@]}"; do
+		printf "%s) %s\n" "$((i+1))" "${matches[$i]}"
+	done
+
+	while true; do
+		read -p "$(echo -e "${orangebold}\nWhich one do you want to use? ${resetcolor}")" choice
+		if [[ $choice =~ ^[1-9][0-9]*$ ]] && [ "$choice" -le "${#matches[@]}" ]; then
+		    davinci_ext="${matches[$((choice-1))]}"
+		    break
+		else
+		    echo -e "${redbold}Invalid choice, please try again.${resetcolor}"
+		fi
+	done
+}
+
+remove_resolve(){
+	sudo rm -rf /opt/resolve
+	sudo rm -rf /usr/share/applications/com.blackmagicdesign.*
+	sudo rm -rf /var/BlackmagicDesign
+	sudo rm -rf /tmp/resolve-tumbleweed
+	sudo rm -f /usr/share/icons/hicolor/128x128/apps/DV_Resolve.png
+	sudo rm -f /usr/share/icons/hicolor/scalable/apps/DV_Resolve.png
+	rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
+}
+
+install_resolve(){
 sudo zypper install -y libapr1-0 libapr-util1-0 libopencl-clang14 libOpenCL1 libOpenCL1-32bit Mesa-libOpenCL libpango-1_0-0 libpango-1_0-0-32bit libpangomm-1_4-1 libpangomm-2_48-1 libjpeg62 libjpeg62-devel
-
-echo -e ""
-echo -e "${orangebold}Please download DaVinci Resolve from:${resetcolor}"
-echo -e "https://www.blackmagicdesign.com/products/davinciresolve/studio"
-echo -e ""
-echo -e "${redbold}Put the zip file in the Downloads folder!${resetcolor}"
-read -p "Press Enter to continue only after doing the above..."
-echo -e ""
-echo -e ""
-
-cd ~/Downloads
-matches=($(ls DaVinci_Resolve_*_Linux.zip 2>/dev/null))
-
-if [ ${#matches[@]} -eq 0 ]; then
-    echo -e "${redbold}No matching files found.${resetcolor}"
-    exit 1
-fi
-
-echo -e "${orangebold}Looking for matches....${resetcolor}\n"
-for i in "${!matches[@]}"; do
-    printf "%s) %s\n" "$((i+1))" "${matches[$i]}"
-done
-
-while true; do
-    read -p "$(echo -e "${orangebold}\nWhich one do you want to use? ${resetcolor}")" choice
-    if [[ $choice =~ ^[1-9][0-9]*$ ]] && [ "$choice" -le "${#matches[@]}" ]; then
-        davinci_ext="${matches[$((choice-1))]}"
-        break
-    else
-        echo -e "${redbold}Invalid choice, please try again.${resetcolor}"
-    fi
-done
-
-sudo rm -rf /opt/resolve
-sudo rm -rf /usr/share/applications/com.blackmagicdesign.*
-sudo rm -rf /var/BlackmagicDesign
-sudo rm -rf /tmp/resolve-tumbleweed
-sudo rm -f /usr/share/icons/hicolor/128x128/apps/DV_Resolve.png
-sudo rm -f /usr/share/icons/hicolor/scalable/apps/DV_Resolve.png
-rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
-
 davinci_no_ext="${davinci_ext%.zip}"
 mkdir /tmp/resolve-tumbleweed
 unzip "$davinci_ext" -d /tmp/resolve-tumbleweed
@@ -141,6 +146,30 @@ echo -e ""
 read -p "$(echo -e "${greenbold}Installed! Open DaVinci Resolve from the AppMenu")"
 echo -e ""
 echo -e ""
+}
+
+show_help() {
+	echo -e "Usage: $0 <command>"
+	echo -e "Available commands:"
+	echo -e "   install       Will detect and install DaVinci_Resolve.zip in your ~/Downloads and remove any previous installations"
+	echo -e "   uninstall     Will uninstall DaVinciResolve and anything related to this script"
+}
+
+case "$1" in
+	install)
+		find_resolve
+		kill_resolve
+		remove_resolve
+		install_resolve
+		;;
+	uninstall)
+		kill_resolve
+		remove_resolve
+		;;
+	*)
+		show_help
+		;;
+esac
 
 # If there's still issues launch DaVinci with
 # LD_PRELOAD='/usr/lib64/libglib-2.0.so.0 /usr/lib64/libgio-2.0.so.0 /usr/lib64/libgmodule-2.0.so.0' /opt/resolve/bin/resolve
