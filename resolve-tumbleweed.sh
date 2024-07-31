@@ -76,7 +76,7 @@ sudo SKIP_PACKAGE_CHECK=1 ./"$davinci_no_ext.run"
 rm -f Linux_Installation_Instructions.pdf
 rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
 
-mkdir -p ~/.local/share/DaVinciResolve
+mkdir -p $HOME/.local/share/DaVinciResolve
 
 cat << 'EOF' > $HOME/.local/share/DaVinciResolve/davinci-launcher-chillsmeit.sh
 #!/bin/bash
