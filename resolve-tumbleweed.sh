@@ -65,7 +65,7 @@ remove_resolve(){
 }
 
 install_resolve(){
-sudo zypper install -y libapr1-0 libapr-util1-0 libopencl-clang14 libOpenCL1 libOpenCL1-32bit Mesa-libOpenCL libpango-1_0-0 libpango-1_0-0-32bit libpangomm-1_4-1 libpangomm-2_48-1 libjpeg62 libjpeg62-devel
+sudo zypper install libapr1-0 libapr-util1-0 libopencl-clang14 libOpenCL1 libOpenCL1-32bit Mesa-libOpenCL libpango-1_0-0 libpango-1_0-0-32bit libpangomm-1_4-1 libpangomm-2_48-1 libjpeg62 libjpeg62-devel
 davinci_no_ext="${davinci_ext%.zip}"
 mkdir /tmp/resolve-tumbleweed
 unzip "$davinci_ext" -d /tmp/resolve-tumbleweed
