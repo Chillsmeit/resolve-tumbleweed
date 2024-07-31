@@ -69,7 +69,6 @@ sudo zypper install -y libapr1-0 libapr-util1-0 libopencl-clang14 libOpenCL1 lib
 davinci_no_ext="${davinci_ext%.zip}"
 mkdir /tmp/resolve-tumbleweed
 unzip "$davinci_ext" -d /tmp/resolve-tumbleweed
-rm "$davinci_ext"
 cd /tmp/resolve-tumbleweed
 sudo SKIP_PACKAGE_CHECK=1 ./"$davinci_no_ext.run"
 
