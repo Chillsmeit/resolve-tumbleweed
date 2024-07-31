@@ -12,10 +12,9 @@ if [[ $EUID -eq 0 ]]; then
 	exit 1
 fi
 
-
+# Get the PID of the current script
+current_pid=$$
 kill_resolve(){
-	# Get the PID of the current script
-	current_pid=$$
 	# Kill the "resolve" processes, excluding the current script
 	pgrep -f "resolve" | grep -v "$current_pid" | xargs -r kill -9 || true
 	pgrep -f "GUI Thread" | xargs -r kill -9
@@ -61,6 +60,7 @@ remove_resolve(){
 	sudo rm -rf /tmp/resolve-tumbleweed
 	sudo rm -f /usr/share/icons/hicolor/128x128/apps/DV_Resolve.png
 	sudo rm -f /usr/share/icons/hicolor/scalable/apps/DV_Resolve.png
+	sudo rm -rf ~/.local/share/DaVinciResolve
 	rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
 }
 
@@ -75,6 +75,8 @@ sudo SKIP_PACKAGE_CHECK=1 ./"$davinci_no_ext.run"
 
 rm -f Linux_Installation_Instructions.pdf
 rm -f ~/Desktop/com.blackmagicdesign.resolve.desktop
+
+mkdir -p ~/.local/share/DaVinciResolve
 
 cat << 'EOF' > $HOME/.local/share/DaVinciResolve/davinci-launcher-chillsmeit.sh
 #!/bin/bash
