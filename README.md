@@ -14,7 +14,11 @@ wget https://raw.githubusercontent.com/Chillsmeit/resolve-tumbleweed/main/resolv
 chmod +x resolve-tumbleweed.sh
 ```
 
-#### Run script:
+#### Install with:
 ```
-./resolve-tumbleweed.sh
+./resolve-tumbleweed.sh install
+```
+#### Uninstall with:
+```
+./resolve-tumbleweed.sh uninstall
 ```
