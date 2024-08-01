@@ -12,9 +12,9 @@ if [[ $EUID -eq 0 ]]; then
 	exit 1
 fi
 
-# Get the PID of the current script
-current_pid=$$
 kill_resolve(){
+	# Get the PID of the current script
+	current_pid=$$
 	# Kill the "resolve" processes, excluding the current script
 	pgrep -f "resolve" | grep -v "$current_pid" | xargs -r kill -9 || true
 	pgrep -f "GUI Thread" | xargs -r kill -9
