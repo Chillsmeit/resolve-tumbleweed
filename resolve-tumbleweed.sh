@@ -3,7 +3,7 @@ clear
 
 check_root(){
 	if [[ $EUID -eq 0 ]]; then
-		read -p "$(printf "\nPlease do not run this script as sudo!")"
+		read -p "$(printf "\n${red}Please do not run this script as sudo!${reset}")" < /dev/tty
 		exit 1
 	fi
 }
@@ -85,7 +85,7 @@ find_resolve(){
 
 	if [ ${#matches[@]} -eq 0 ]; then
 		printf "\n${red}No matching files found.${reset}"
-		read -p "$(printf "\n${orange}Please put DaVinci Resolve zip in your Downloads Folder...${reset}")"
+		read -p "$(printf "\n${orange}Please put DaVinci Resolve zip in your Downloads Folder...${reset}")" < /dev/tty
 		menu_loop
 	fi
 	printf "\n\n${orange}Found the following matches:${reset}\n"
@@ -94,7 +94,7 @@ find_resolve(){
 	done
 	
 	while true; do
-		read -p "$(printf "\nChoose an option: ")" choice
+		read -p "$(printf "\nChoose an option: ")" choice < /dev/tty
 		if [[ $choice =~ ^[1-9][0-9]*$ ]] && [ "$choice" -le "${#matches[@]}" ]; then
 		    davinci_ext="${matches[$((choice-1))]}"
 		    break
@@ -206,7 +206,7 @@ install_resolve(){
 	sudo cp -va /lib64/libglib-2.0.* /opt/resolve/libs/
 	sudo rm -rf /tmp/resolve-chillsmeit
 
-	read -p "$(printf "\n\n${green}Installed!${reset}\n\n")"
+	read -p "$(printf "\n\n${green}Installed!${reset}\n\n")" < /dev/tty
 }
 
 menu_loop(){
@@ -222,7 +222,7 @@ menu_loop(){
 		printf "${orange}|█▓▓${white}                                                ${orange}▓▓█|\n"
 		printf "${orange}|██████████████████████████████████████████████████████|${reset}\n\n"
 
-		read -p "Choose an option: " menuoption
+		read -p "Choose an option: " menuoption < /dev/tty
 
 		case "$menuoption" in
 			1)
@@ -245,12 +245,11 @@ menu_loop(){
 		esac
 	done
 }
+# Set terminal to either 16 ANSI or 256 ANSI
+set_term_colors
 
 # Checks if Script is being run as root
 check_root
-
-# Set terminal to either 16 ANSI or 256 ANSI
-set_term_colors
 
 # Main Menu loop
 menu_loop
