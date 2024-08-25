@@ -6,7 +6,5 @@ Script that fixes DaVinci Resolve in OpenSUSE Tumbleweed
 - Fixes DaVinci Resolve not closing the "resolve" and "GUI Thread" process when you close the application which makes it not launch again
 #### Run with:
 ```
-wget https://raw.githubusercontent.com/Chillsmeit/resolve-tumbleweed/main/resolve-tumbleweed.sh
-chmod +x resolve-tumbleweed.sh
-./resolve-tumbleweed.sh
+curl -s https://raw.githubusercontent.com/Chillsmeit/resolve-tumbleweed/main/resolve-tumbleweed.sh | bash
 ```
