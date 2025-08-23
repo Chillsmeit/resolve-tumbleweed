@@ -1,6 +1,6 @@
 # Script that fixes DaVinci Resolve in OpenSUSE Tumbleweed
 
-### As of 23 Agust 2025 this still works
+### As of 23rd Agust 2025 this still works
 - For future issues regarding dependencies mismatch, please submit a PR as I don't use OpenSUSE TW anymore
 
 #### Features:
