@@ -1,7 +1,7 @@
 # Script that fixes DaVinci Resolve in OpenSUSE Tumbleweed
 
 ### As of 23 Agust 2025 this still works
-- For future issues regarding dependencies, please submit a PR as I don't use OpenSUSE TW anymore
+- For future issues regarding dependencies mismatch, please submit a PR as I don't use OpenSUSE TW anymore
 
 #### Features:
 - Fixes DaVinci Resolve not working in OpenSUSE Tumbleweed
