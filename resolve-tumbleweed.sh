@@ -80,7 +80,15 @@ kill_resolve(){
 }
 
 find_resolve(){
-	cd ~/Downloads
+	# Captura la salida del comando y la asigna a la variable
+	DOWNLOADS_DIR=$(xdg-user-dir DOWNLOAD)
+
+	# Verifica si la variable tiene un valor
+	if [ -z "$DOWNLOADS_DIR" ]; then
+		printf "\n${orange}Error: cound not find the Downloads folder.${reset}"
+		menu_loop
+	fi
+	cd "$DOWNLOADS_DIR"
 	matches=($(ls DaVinci_Resolve_*_Linux.zip 2>/dev/null))
 
 	if [ ${#matches[@]} -eq 0 ]; then
